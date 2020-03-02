@@ -1,8 +1,8 @@
 <schema
-        xmlns="http://www.w3.org/2001/XMLSchema"
-        xmlns:p="urn:presentation"
-        targetNamespace="urn:presentation"
-        elementFormDefault="qualified"
+   xmlns="http://www.w3.org/2001/XMLSchema"
+   xmlns:p="urn:presentation"
+   targetNamespace="urn:presentation"
+   elementFormDefault="qualified"
 >
     <element name="présentation" type="p:type_presentation" />
 
@@ -56,16 +56,25 @@
             </choice>
             <attribute name="class" type="string" use="optional"/>
         </complexType>
+
+        <complexType name="type_liste">
+            <sequence>
+                <element name="item" type="p:type_item" maxOccurs="unbounded"/>
+            </sequence>
+            <attribute name="type" type="string" use="optional"/>
+        </complexType>
+
+        <complexType name="type_item">
+            <sequence>
+                <element name="para" type="p:type_para" maxOccurs="unbounded"/>
+                <element name="liste" type="p:type_liste" minOccurs="0"/>
+            </sequence>
+        </complexType>
+
+        <complexType name="type_image">
+            <attribute name="src" type="string" use="optional"/>
+        </complexType>
 </schema>
-
-
-        <!--
-           type="string" forcer à avoir que du contenu de type text donc
-        si attributs == complexetype
-            unbounded : illimitée
-            maxOccurs =
-            declarer les bons nom dont element racine
-        -->
 
 <!--
 <schema
