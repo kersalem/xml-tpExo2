@@ -9,8 +9,28 @@
         <!-- définition des complexes types-->
         <complexType name="type_presentation">
             <sequence>
-                <element name="en-tête" type="p:type_entête" />
-                <element name="diapo" type="p:type_diapo" maxOccurs="unbounded"/>
+                <element name="en-tête">    <!-- type="p:type_entête"-->
+                    <complexType>
+                        <sequence>
+                            <element name="modèle" maxOccurs="unbounded">
+                                <complexType>
+                                    <attribute  name="nom"  type="string" use="required"/>
+                                    <attribute name="color" type="string" use="required"/>
+                                    <attribute name="taille" type="integer" use="optional"/>
+                                </complexType>
+                            </element>
+                        </sequence>
+                    </complexType>
+                    <unique name="uniqueName">
+                        <selector xpath="p:modèle"/>
+                        <field xpath="@nom"/>
+                    </unique>
+                    <key name="myId">
+                        <selector xpath="p:modèle"/>
+                        <field xpath="@nom"/>
+                    </key>
+                </element>
+                <element name="diapo" maxOccurs="unbounded"/>
             </sequence>
         </complexType>
 
@@ -18,6 +38,12 @@
             <sequence maxOccurs="unbounded">
                 <element name="modèle" type="p:type_modele" maxOccurs="unbounded" />
                 <element name="template" type="p:type_modele" minOccurs="0" maxOccurs="3" />
+            </sequence>
+        </complexType>
+
+        <complexType name="type_corps">
+            <sequence maxOccurs="unbounded" minOccurs="0">
+                <element name="bloc" type="p:type_bloc"/>
             </sequence>
         </complexType>
 
