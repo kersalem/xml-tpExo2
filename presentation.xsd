@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <schema   xmlns:p="urn:presentation"
           xmlns="http://www.w3.org/2001/XMLSchema"
           targetNamespace="urn:presentation"
@@ -12,6 +13,7 @@
                 <element maxOccurs="unbounded" ref="p:diapo"/>
             </sequence>
         </complexType>
+        <!-- présentation-ko8-->
         <keyref name="myIdref" refer="p:myId">
             <selector xpath="p:diapo"/>
             <field xpath="@ref_modèle"/>
@@ -25,10 +27,6 @@
                 <element maxOccurs="unbounded" ref="p:modèle"/>
             </sequence>
         </complexType>
-        <unique name="uniqueName">
-            <selector xpath="p:modèle"/>
-            <field xpath="@nom"/>
-        </unique>
         <key name="myId">
             <selector xpath="p:modèle"/>
             <field xpath="@nom"/>
@@ -38,8 +36,8 @@
     <!-- modele-->
     <element name="modèle">
         <complexType>
-            <attribute name="color" use="required" type="NMTOKEN"/>
             <attribute name="nom" use="required" type="NCName"/>
+            <attribute name="color" use="required"/>
             <attribute name="taille" type="integer"/>
         </complexType>
     </element>
@@ -54,7 +52,8 @@
             <attribute name="ref_modèle" use="required" type="NCName"/>
         </complexType>
     </element>
-    <element name="titre" type="string"/>
+
+    <!-- corps-->
     <element name="corps">
         <complexType>
             <sequence>
@@ -74,13 +73,6 @@
         </complexType>
     </element>
 
-    <!-- image-->
-    <element name="image">
-        <complexType>
-            <attribute name="src" use="required" type="NCName"/>
-        </complexType>
-    </element>
-
     <!-- para-->
     <element name="para">
         <complexType mixed="true">
@@ -90,8 +82,8 @@
             </choice>
         </complexType>
     </element>
-    <element name="couleur" type="NCName"/>
-    <element name="gras" type="NCName"/>
+
+    <!-- liste-->
     <element name="liste">
         <complexType>
             <sequence>
@@ -110,5 +102,21 @@
             </choice>
         </complexType>
     </element>
+
+    <!-- image-->
+    <element name="image">
+        <complexType>
+            <attribute name="src" type="NCName"/>
+        </complexType>
+    </element>
+
+    <!-- titre-->
+    <element name="titre" type="string"/>
+
+    <!-- couleur-->
+    <element name="couleur" type="NCName"/>
+
+    <!-- gras-->
+    <element name="gras" type="NCName"/>
 
 </schema>
